@@ -1,0 +1,10 @@
+*~
+\#*#
+.#*
+*.bak
+*.orig
+.ruby-version
+.DS_Store
+manual/*.html
+plugins/
+resurrect/

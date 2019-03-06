@@ -1,0 +1,153 @@
+#
+# .tmux.conf
+#
+# Time-stamp: <2016-08-04 10:32:08 (ryosuke)>
+#
+#-----------------------------------------------
+# prefix キー
+#-----------------------------------------------
+set -g prefix C-u
+bind C-u send-prefix
+unbind C-b
+#-----------------------------------------------
+
+#-----------------------------------------------
+# 基本設定
+#-----------------------------------------------
+# キーストロークのディレイを減らす
+set -sg escape-time 1
+
+# ウィンドウのインデックスを1から始める
+#set -g base-index 1
+# ペインのインデックスを1から始める
+#setw -g pane-base-index 1
+
+# 設定ファイルをリロードする
+bind r source-file ~/.tmux.conf \; display "Reloaded!"
+
+set-option -g allow-rename off
+
+# Tmux が使うシェルの指定
+# set-option -g default-shell /usr/bin/zsh
+
+# マウス操作を有効にする
+#set-option -g mode-mouse on
+#set-option -g mouse-select-pane on
+#set-option -g mouse-select-window on
+#set-option -g mouse-resize-pane on
+# for version > 2.1
+#setw -g mouse
+#bind-key -n WheelUpPane select-pane -t= \; copy-mode -e\; send-keys -M
+#bind-key -n WheelDownPane select-pane -t= \; send-keys -M
+
+# コピーモードを設定する
+## viのキーバインドを使用する
+#setw -g mode-keys vi
+## コピーモードの操作をvi風に設定する
+#bind-key -t vi-copy v begin-selection
+#bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
+#unbind -t vi-copy Enter
+#bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
+## クリップボード共有を有効にする
+#if-shell "which xsel" '\
+#  bind-key -t vi-copy y copy-pipe "xsel -ib"; \
+#  bind-key -t vi-copy Enter copy-pipe "xsel -ib"; \
+#'
+#-----------------------------------------------
+
+#-----------------------------------------------
+# ペイン関連
+#-----------------------------------------------
+bind c new-window -c "#{pane_current_path}"
+# |- でペインを縦横に分割する
+bind | split-window -hc "#{pane_current_path}"
+bind - split-window -vc "#{pane_current_path}"
+
+# Vimのキーバインドでペインを移動する
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+bind -r C-h select-window -t :-
+bind -r C-l select-window -t :+
+
+# Vimのキーバインドでペインをリサイズする
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5
+#-----------------------------------------------
+
+#-----------------------------------------------
+# アピアランス
+#-----------------------------------------------
+# 256色端末を使用する
+set -g default-terminal "screen-256color"
+
+# アクティブなウィンドウを目立たせる
+setw -g window-status-current-fg black
+setw -g window-status-current-bg cyan
+setw -g window-status-current-attr bright
+# アクティブなペインを目立たせる
+set -g pane-active-border-fg white
+set -g pane-active-border-bg green #yellow
+
+# ペインボーダーの色を設定する
+set -g pane-border-fg green
+set -g pane-border-bg black
+
+# コマンドラインの色を設定する
+set -g message-fg white
+set -g message-bg black
+set -g message-attr bright
+
+# ステータスバーを設定する
+set -g status-fg white
+set -g status-bg black
+## ステータスバーを上部に表示する
+set -g status-position top
+## 左パネルを設定する
+set -g status-left-length 40
+set -g status-left-bg colour38
+set -g status-left "#{?client_prefix,#[reverse],}#[fg=gray]Session: [#S] #[fg=white]window:#I/pane:#P "
+## 右パネルを設定する
+set -g status-right "#{?client_prefix,#[reverse],}#[fg=cyan] |#H| [%Y-%m-%d(%a) %H:%M]"
+## ステータスバーのUTF-8サポートを有効にする
+#set -g status-utf8 on
+## リフレッシュの間隔を設定する(デフォルト 15秒)
+set -g status-interval 60
+## ウィンドウリストの色を設定する
+setw -g window-status-fg cyan
+setw -g window-status-bg default
+setw -g window-status-attr dim
+set -g window-status-current-format "#{?client_prefix,#[reverse],}#[bg=blue, fg=black] >> #I:#W << "
+## ウィンドウリストの位置を中心寄せにする
+set -g status-justify centre
+## ヴィジュアルノーティフィケーションを有効にする
+setw -g monitor-activity on
+set -g visual-activity on
+#-----------------------------------------------
+
+#-----------------------------------------------
+# プラグイン
+#-----------------------------------------------
+# continuum
+set -g @continuum-restore 'on'
+# resurrect
+set -g @resurrect-strategy-vim 'session'
+set -g @resurrect-processes 'dft ssh prj lec rsh cfg'
+
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+
+# Other examples:
+# set -g @plugin 'github_username/plugin_name'
+# set -g @plugin 'git@github.com/user/plugin'
+# set -g @plugin 'git@bitbucket.com/user/plugin'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
+#-----------------------------------------------
