@@ -25,7 +25,7 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 ## Theme (https://github.com/sindresorhus/pure#zplug)
-#zplug "mafredri/zsh-async", from:github 
+#zplug "mafredri/zsh-async", from:github
 #zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
 zplug "themes/gnzh", from:oh-my-zsh, as:theme
 #zplug "yous/lime", as:theme
@@ -91,7 +91,7 @@ function history-fzf() {
 }
 zle -N history-fzf
 bindkey '^r' history-fzf
-                      
+
 ##function peco-history-selection() {
 ##    BUFFER=`\\history -n 1 | tac -r  | awk '!a[$0]++' | peco`
 ##    CURSOR=$#BUFFER
