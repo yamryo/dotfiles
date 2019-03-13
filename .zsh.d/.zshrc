@@ -10,11 +10,14 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Uncomment the following line to disable auto-setting terminal title.
 DISABLE_AUTO_TITLE="true"
 
-
 autoload -Uz compinit && compinit -i
 
+# For miniconda3
+. /usr/local/miniconda3/etc/profile.d/conda.sh
+conda activate base
+
 # -----------------------------
-# Plugins managed by zplugin
+# Plugins managed by Zplugin
 # -----------------------------
 ### Added by Zplugin's installer
 source "$HOME/.zsh.d/.zplugin/bin/zplugin.zsh"
@@ -31,14 +34,17 @@ zplugin load zsh-users/zsh-autosuggestions
 zplugin load zsh-users/zsh-completions
 zplugin load chrissicool/zsh-256color
 
+### OMZ theme
+zplugin snippet OMZ::lib/git.zsh # Load OMZ Git library
+zplugin snippet OMZ::plugins/git/git.plugin.zsh # Load Git plugin from OMZ
+zplugin cdclear -q # <- forget completions provided up to this moment
 setopt promptsubst
-zplugin snippet OMZ::lib/git.zsh
-zplugin ice atload"unalias grv"
-zplugin snippet OMZ::plugins/git/git.plugin.zsh
+# Load theme from OMZ
 zplugin snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
-zplugin snippet OMZ::themes/gnzh.zsh-theme #bira.zsh-theme #dstufft.zsh-theme
-#zplugin ice atinit"zpcompinit"
-#zplugin light zdharma/fast-syntax-highlighting
+zplugin snippet OMZ::themes/gnzh.zsh-theme #bira.zsh-theme #dstufft.zsh-theme #
+
+# Load normal Github plugin with theme depending on OMZ Git library
+#zplugin light NicoSantangelo/Alpharized
 
 ## -----------------------------
 ## User configuration
@@ -57,8 +63,10 @@ source ~/.bash_aliases
 
 # History
 export HISTFILE=$ZDOTDIR/.zsh_history
-export SAVEHIST=100000
+HISTSIZE=10000
+SAVEHIST=10000
 setopt hist_ignore_dups
+setopt share_history
 
 function history-fzf() {
   local tac
@@ -73,14 +81,6 @@ function history-fzf() {
 }
 zle -N history-fzf
 bindkey '^r' history-fzf
-
-##function peco-history-selection() {
-##    BUFFER=`\\history -n 1 | tac -r  | awk '!a[$0]++' | peco`
-##    CURSOR=$#BUFFER
-##    zle reset-prompt
-##}
-##zle -N peco-history-selection
-## bindkey '^R' peco-history-selection
 
 # shorten current path in prompt
 export PROMPT=$(print $PROMPT | sed -E -e "s|%~|%(5~,%-2~/../%2~,%~)|")
