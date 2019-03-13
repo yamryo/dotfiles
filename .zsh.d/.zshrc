@@ -10,7 +10,6 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Uncomment the following line to disable auto-setting terminal title.
 DISABLE_AUTO_TITLE="true"
 
-export HISTFILE=$ZDOTDIR/.zsh_history
 
 autoload -Uz compinit && compinit -i
 
@@ -55,6 +54,11 @@ export LESS='-g -i -M -R -S -W -z-5 -x4'
 
 # Set personal aliases,
 source ~/.bash_aliases
+
+# History
+export HISTFILE=$ZDOTDIR/.zsh_history
+export SAVEHIST=100000
+setopt hist_ignore_dups
 
 function history-fzf() {
   local tac
