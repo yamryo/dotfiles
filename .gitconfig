@@ -5,7 +5,7 @@
     excludesfile = ~/.gitignore
 #    attributesfile = ~/.gitattributes
     editor = nano #emacs
-    pager = lv -c #less #
+    pager = more #lv -c #less #
     # Unicode
     precomposeunicode = true
     quotepath = true
@@ -44,6 +44,9 @@
     dc = diff --cached
     wc = whatchanged
     sb = show-branch
+	ls = !git ls-files -t|perl -pe 's/\\/.*/\\//'|uniq -c
+	ll = !git ls-files -cdmokt|perl -pe 's/\\/.*/\\//'|grep -v '/'
+    cof = !git branch -a | fzf | xargs git checkout
     
 [merge]
 	tool = meld
