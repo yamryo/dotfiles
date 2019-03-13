@@ -2,6 +2,7 @@
 # -----------------------------
 # PATH and other customize
 # -----------------------------
+#zmodload zsh/zprof && zprof
 
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -14,58 +15,35 @@ export HISTFILE=$ZDOTDIR/.zsh_history
 autoload -Uz compinit && compinit -i
 
 # -----------------------------
-# Plugins managed by zplug
+# Plugins managed by zplugin
 # -----------------------------
+### Added by Zplugin's installer
+source "$HOME/.zsh.d/.zplugin/bin/zplugin.zsh"
+autoload -Uz _zplugin
+(( ${+_comps} )) && _comps[zplugin]=_zplugin
+### End of Zplugin's installer chunk
 
-source $ZPLUG_HOME/init.zsh
+zplugin load momo-lab/zsh-abbrev-alias # 略語を展開する
+zplugin load zsh-users/zsh-syntax-highlighting # 実行可能なコマンドに色付け
+zplugin load zsh-users/zsh-history-substring-search # history関係
 
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-# export ZSH_HIGHLIGHT_STYLES[path]='fg=081'
+### タイプ補完
+zplugin load zsh-users/zsh-autosuggestions
+zplugin load zsh-users/zsh-completions
+zplugin load chrissicool/zsh-256color
 
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+setopt promptsubst
+zplugin snippet OMZ::lib/git.zsh
+zplugin ice atload"unalias grv"
+zplugin snippet OMZ::plugins/git/git.plugin.zsh
+zplugin snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
+zplugin snippet OMZ::themes/gnzh.zsh-theme #bira.zsh-theme #dstufft.zsh-theme
+#zplugin ice atinit"zpcompinit"
+#zplugin light zdharma/fast-syntax-highlighting
 
-## Theme (https://github.com/sindresorhus/pure#zplug)
-#zplug "mafredri/zsh-async", from:github 
-#zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
-zplug "themes/gnzh", from:oh-my-zsh, as:theme
-#zplug "yous/lime", as:theme
-
-## history関係
-zplug "zsh-users/zsh-history-substring-search"
-
-## タイプ補完
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
-zplug "chrissicool/zsh-256color"
-
-## fuzzy finders
-zplug "junegunn/fzf-bin", \
-    as:command, \
-    rename-to:"fzf", \
-    from:gh-r
-zplug "junegunn/fzf", as:command, use:bin/fzf-tmux
-
-zplug "peco/peco", as:command, from:gh-r
-
-## enhancd
-zplug "b4b4r07/enhancd", use:init.sh
-export ENHANCD_DIR=$ZDOTDIR/.enhancd
-export ENHANCD_COMMAND=cds
-
-## Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-  printf "Install? [y/N]: "
-  if read -q; then
-    echo; zplug install
-  fi
-fi
-
-## Then, source plugins and add commands to $PATH
-zplug load
-
-# -----------------------------
-# User configuration
-# -----------------------------
+## -----------------------------
+## User configuration
+## -----------------------------
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -91,7 +69,7 @@ function history-fzf() {
 }
 zle -N history-fzf
 bindkey '^r' history-fzf
-                      
+
 ##function peco-history-selection() {
 ##    BUFFER=`\\history -n 1 | tac -r  | awk '!a[$0]++' | peco`
 ##    CURSOR=$#BUFFER
@@ -110,3 +88,7 @@ setopt auto_menu
 zstyle ':completion:*:default' menu select=1
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:su=41;30:sg=46;30:tw=42;30:tw=42;30:ow=43;30'
 zstyle 'completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+#if (which zprof > /dev/null) ;then
+#      zprof | less
+#fi
