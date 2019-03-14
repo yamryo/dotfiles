@@ -63,7 +63,7 @@ zplugin snippet OMZ::themes/gnzh.zsh-theme #bira.zsh-theme #dstufft.zsh-theme #
 
 export LESS='-g -i -M -R -S -W -z-5 -x4'
 
-# Set personal aliases,
+# Set personal aliases
 source ~/.bash_aliases
 
 # History
