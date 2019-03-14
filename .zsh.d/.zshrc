@@ -52,12 +52,13 @@ zplugin snippet OMZ::themes/gnzh.zsh-theme #bira.zsh-theme #dstufft.zsh-theme
 
 export LESS='-g -i -M -R -S -W -z-5 -x4'
 
-# Set personal aliases,
+# Set personal aliases
 source ~/.bash_aliases
 
 # History
 export HISTFILE=$ZDOTDIR/.zsh_history
 export SAVEHIST=100000
+export HISTSIZE=100000
 setopt hist_ignore_dups
 
 function history-fzf() {
