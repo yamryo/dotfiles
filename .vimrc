@@ -176,9 +176,9 @@ set ruler
 set number
 
 let no_buffers_menu=1
-if !exists('g:not_finish_vimplug')
-  colorscheme molokai
-endif
+"if !exists('g:not_finish_vimplug')
+"  colorscheme molokai
+"endif
 
 set mousemodel=popup
 set t_Co=256
@@ -199,7 +199,7 @@ else
   let g:indentLine_char = '┆'
   let g:indentLine_faster = 1
 
-  
+
   if $COLORTERM == 'gnome-terminal'
     set term=gnome-256color
   else
@@ -207,7 +207,7 @@ else
       set term=xterm-256color
     endif
   endif
-  
+
 endif
 
 
@@ -220,18 +220,18 @@ endif
 set gcr=a:blinkon0
 set scrolloff=3
 
-""" Status bar
+"" Status bar
 set laststatus=2
-"
-""" Use modeline overrides
-"set modeline
-"set modelines=10
-"
-"set title
-"set titleold="Terminal"
-"set titlestring=%F
-"
-"set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
+
+"" Use modeline overrides
+set modeline
+set modelines=10
+
+set title
+set titleold="Terminal"
+set titlestring=%F
+
+set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
@@ -243,7 +243,7 @@ if exists("*fugitive#statusline")
 endif
 
 " lightline.vim
-let g:lightline = { 'colorscheme': 'one' }
+let g:lightline = { 'colorscheme': 'jellybeans' }
 
 "" vim-airline
 "let g:airline_theme = 'powerlineish'
