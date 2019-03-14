@@ -98,7 +98,7 @@ fzf-z-search() {
   fi
 }
 zle -N fzf-z-search
-bindkey '^f' fzf-z-search
+bindkey '^s' fzf-z-search
 #alias cds=fzf-z-search
 
 # shorten current path in prompt
