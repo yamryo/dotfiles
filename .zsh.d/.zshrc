@@ -13,7 +13,11 @@ DISABLE_AUTO_TITLE="true"
 autoload -Uz compinit && compinit -i
 
 # For miniconda3
-. /usr/local/miniconda3/etc/profile.d/conda.sh
+conda_script=/usr/local/miniconda3/etc/profile.d/conda.sh 
+if [ -e $conda_script ]; then
+    source $conda_script
+fi
+
 #conda activate base
 
 # -----------------------------
@@ -68,8 +72,8 @@ source ~/.bash_aliases
 
 # History
 export HISTFILE=$ZDOTDIR/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+export HISTSIZE=100000
+export SAVEHIST=100000
 setopt hist_ignore_dups
 setopt share_history
 
