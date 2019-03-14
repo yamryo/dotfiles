@@ -14,13 +14,14 @@ autoload -Uz compinit && compinit -i
 
 # For miniconda3
 . /usr/local/miniconda3/etc/profile.d/conda.sh
-conda activate base
+#conda activate base
 
 # -----------------------------
 # Plugins managed by Zplugin
 # -----------------------------
 ### Added by Zplugin's installer
-source "$HOME/.zsh.d/.zplugin/bin/zplugin.zsh"
+export ZPLUGINDIR=$ZDOTDIR/.zplugin
+source "$ZPLUGINDIR/bin/zplugin.zsh"
 autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
 ### End of Zplugin's installer chunk
@@ -32,7 +33,11 @@ zplugin load zsh-users/zsh-history-substring-search # history関係
 ### タイプ補完
 zplugin load zsh-users/zsh-autosuggestions
 zplugin load zsh-users/zsh-completions
-zplugin load chrissicool/zsh-256color
+
+### others
+zplugin load rupa/z
+. $ZPLUGINDIR/plugins/rupa---z/z.sh
+export _Z_DATA=$ZDOTDIR/.z_data
 
 ### OMZ theme
 zplugin snippet OMZ::lib/git.zsh # Load OMZ Git library
@@ -82,6 +87,20 @@ function history-fzf() {
 zle -N history-fzf
 bindkey '^r' history-fzf
 
+# z.sh with fzf
+fzf-z-search() {
+  local res=$(z | sort -rn | cut -c 12- | fzf)
+  if [ -n "$res" ]; then
+    BUFFER+="cd $res"
+    zle accept-line
+  else
+    return 1
+  fi
+}
+zle -N fzf-z-search
+bindkey '^f' fzf-z-search
+#alias cds=fzf-z-search
+
 # shorten current path in prompt
 export PROMPT=$(print $PROMPT | sed -E -e "s|%~|%(5~,%-2~/../%2~,%~)|")
 
@@ -94,5 +113,5 @@ export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:su=41;30:sg=46;30:tw=42
 zstyle 'completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 #if (which zprof > /dev/null) ;then
-#      zprof | less
+#  zprof | less
 #fi
