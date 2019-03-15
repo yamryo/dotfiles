@@ -5,7 +5,7 @@
     excludesfile = ~/.gitignore
 #    attributesfile = ~/.gitattributes
     editor = nano #emacs
-    pager = more #lv -c #less #
+    pager = more -eR #lv -c #less #
     # Unicode
     precomposeunicode = true
     quotepath = true
