@@ -238,7 +238,7 @@ if exists("*fugitive#statusline")
 endif
 
 "" lightline.vim
-let g:lightline = { 'colorscheme': 'jellybeans' }
+let g:lightline = { 'colorscheme': 'iceberg'}  "'jellybeans' }
 
 "let g:lightline = {
 "\ 'colorscheme': 'wombat',
