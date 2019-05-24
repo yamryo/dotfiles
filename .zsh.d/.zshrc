@@ -5,19 +5,27 @@
 #zmodload zsh/zprof && zprof
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+#export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Uncomment the following line to disable auto-setting terminal title.
 DISABLE_AUTO_TITLE="true"
 
 autoload -Uz compinit && compinit -i
 
-# For miniconda3
+typeset -U path PATH
+
+#--- rbenv ---
+export PATH="HOME/.rbenv/bin:$PATH"
+export PATH=/usr/local/sbin:/usr/local/bin:$PATH
+eval "$(rbenv init -)"
+
+#--- Miniconda3 & Jupyter ---
 conda_script=/usr/local/miniconda3/etc/profile.d/conda.sh
 if [ -e $conda_script ]; then
     source $conda_script
 fi
 #conda activate base
+export SAGE_ROOT="/Applications/SageMath-8.7.app/Contents/Resources/sage"
 
 # -----------------------------
 # Plugins managed by Zplugin
@@ -50,7 +58,7 @@ setopt promptsubst
 # Load theme
 #zplugin snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
 #zplugin snippet OMZ::themes/gnzh.zsh-theme #bira.zsh-theme #dstufft.zsh-theme #
-# プロンプトのテーマを遅延ロードします。このプラグインのみロード完了後にプロンプトを再描画しています。
+# プロンプトのテーマを遅延ロード。以下でプロンプトをいじってるので、遅延は停止中[20190525]。
 #zplugin ice pick'spaceship.zsh' wait'!0'
 zplugin light 'denysdovhan/spaceship-zsh-theme'
 
