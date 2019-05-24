@@ -13,11 +13,10 @@ DISABLE_AUTO_TITLE="true"
 autoload -Uz compinit && compinit -i
 
 # For miniconda3
-conda_script=/usr/local/miniconda3/etc/profile.d/conda.sh 
+conda_script=/usr/local/miniconda3/etc/profile.d/conda.sh
 if [ -e $conda_script ]; then
     source $conda_script
 fi
-
 #conda activate base
 
 # -----------------------------
@@ -48,9 +47,12 @@ zplugin snippet OMZ::lib/git.zsh # Load OMZ Git library
 zplugin snippet OMZ::plugins/git/git.plugin.zsh # Load Git plugin from OMZ
 zplugin cdclear -q # <- forget completions provided up to this moment
 setopt promptsubst
-# Load theme from OMZ
-zplugin snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
-zplugin snippet OMZ::themes/gnzh.zsh-theme #bira.zsh-theme #dstufft.zsh-theme #
+# Load theme
+#zplugin snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
+#zplugin snippet OMZ::themes/gnzh.zsh-theme #bira.zsh-theme #dstufft.zsh-theme #
+# プロンプトのテーマを遅延ロードします。このプラグインのみロード完了後にプロンプトを再描画しています。
+#zplugin ice pick'spaceship.zsh' wait'!0'
+zplugin light 'denysdovhan/spaceship-zsh-theme'
 
 # Load normal Github plugin with theme depending on OMZ Git library
 #zplugin light NicoSantangelo/Alpharized
@@ -108,8 +110,14 @@ zle -N fzf-z-search
 bindkey '^J' fzf-z-search
 #alias cds=fzf-z-search
 
+## Prompt Customization
 # shorten current path in prompt
-export PROMPT=$(print $PROMPT | sed -E -e "s|%~|%(5~,%-2~/../%2~,%~)|")
+#export PROMPT=$(print $PROMPT | sed -E -e "s|%~|%(7~,%-2~/../%2~,%~)|")
+# For spaceship-zsh-theme
+export SPACESHIP_PROMPT_ADD_NEWLINE="false"
+export SPACESHIP_CHAR_SYMBOL="╰─➤ "
+export SPACESHIP_CHAR_COLOR_SUCCESS=""
+export PROMPT="╭─ "$PROMPT
 
 # for completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
