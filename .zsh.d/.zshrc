@@ -49,6 +49,8 @@ zplugin load zsh-users/zsh-completions
 zplugin load rupa/z
 . $ZPLUGINDIR/plugins/rupa---z/z.sh
 export _Z_DATA=$ZDOTDIR/.z_data
+zplugin light "marzocchi/zsh-notify"
+zplugin ice wait'!0'; zplugin light "vintersnow/anyframe"
 
 ### OMZ theme
 zplugin snippet OMZ::lib/git.zsh # Load OMZ Git library
@@ -102,7 +104,7 @@ function history-fzf() {
   zle reset-prompt
 }
 zle -N history-fzf
-bindkey '^r' history-fzf
+bindkey '^h' history-fzf
 
 # z.sh with fzf
 fzf-z-search() {
@@ -117,6 +119,20 @@ fzf-z-search() {
 zle -N fzf-z-search
 bindkey '^J' fzf-z-search
 #alias cds=fzf-z-search
+
+## For anyframe
+bindkey '^xj' anyframe-widget-cdr
+bindkey '^xr' anyframe-widget-execute-history
+bindkey '^xi' anyframe-widget-put-history
+bindkey '^xk' anyframe-widget-kill
+bindkey '^xe' anyframe-widget-insert-git-branch
+bindkey '^xb' anyframe-widget-checkout-git-branch
+
+# expressly specify to use fzf
+zstyle ":anyframe:selector:" use fzf
+
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
 
 ## Prompt Customization
 # shorten current path in prompt
