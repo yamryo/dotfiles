@@ -104,7 +104,7 @@ function history-fzf() {
   zle reset-prompt
 }
 zle -N history-fzf
-bindkey '^h' history-fzf
+bindkey '^r' history-fzf
 
 # z.sh with fzf
 fzf-z-search() {
@@ -139,9 +139,9 @@ add-zsh-hook chpwd chpwd_recent_dirs
 #export PROMPT=$(print $PROMPT | sed -E -e "s|%~|%(7~,%-2~/../%2~,%~)|")
 # For spaceship-zsh-theme
 export SPACESHIP_PROMPT_ADD_NEWLINE="false"
+export PROMPT="╭─ "$PROMPT
 export SPACESHIP_CHAR_SYMBOL="╰─➤ "
 export SPACESHIP_CHAR_COLOR_SUCCESS=""
-export PROMPT="╭─ "$PROMPT
 
 # for completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
