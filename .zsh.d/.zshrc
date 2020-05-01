@@ -14,18 +14,21 @@ autoload -Uz compinit && compinit -i
 
 typeset -U path PATH
 
+#--- TeXLive --- 
+export PATH=/usr/local/texlive/2020/bin/x86_64-linux:$PATH
+
 #--- rbenv ---
-export PATH="HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH=/usr/local/sbin:/usr/local/bin:$PATH
 eval "$(rbenv init -)"
 
 #--- Miniconda3 & Jupyter ---
-conda_script=/usr/local/miniconda3/etc/profile.d/conda.sh
-if [ -e $conda_script ]; then
-    source $conda_script
-fi
+#conda_script=/usr/local/miniconda3/etc/profile.d/conda.sh
+#if [ -e $conda_script ]; then
+#    source $conda_script
+#fi
 #conda activate base
-export SAGE_ROOT="/Applications/SageMath-8.7.app/Contents/Resources/sage"
+#export SAGE_ROOT="/Applications/SageMath-8.7.app/Contents/Resources/sage"
 
 # -----------------------------
 # Plugins managed by Zplugin
@@ -49,7 +52,7 @@ zplugin load zsh-users/zsh-completions
 zplugin load rupa/z
 . $ZPLUGINDIR/plugins/rupa---z/z.sh
 export _Z_DATA=$ZDOTDIR/.z_data
-zplugin light "marzocchi/zsh-notify"
+#zplugin light "marzocchi/zsh-notify"
 zplugin ice wait'!0'; zplugin light "vintersnow/anyframe"
 
 ### OMZ theme

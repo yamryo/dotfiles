@@ -3,6 +3,7 @@
 .#*
 *.bak
 *.orig
+.bash_history
 .ruby-version
 .DS_Store
 manual/*.html
