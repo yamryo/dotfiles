@@ -3,7 +3,7 @@
 
 cd `dirname $0`/..
 
-home_dir=$HOME/tmp/nisehome #$HOME # 
+home_dir=$HOME #/tmp/nisehome
 backup_dir=$HOME/tmp/backup_dir_dotfiles
 if [ ! -e "${backup_dir}" ]; then
     echo "Create ${backup_dir}."
@@ -21,8 +21,8 @@ done
 for dotty in ${dotties[@]}
 do
     target=${home_dir}/${dotty}
-    echo
-    echo ">>>>> Start syncing >>>>>"
+    #echo
+    #echo ">>>>> Start syncing >>>>>"
     #---
     if [ ! -e "${target}" ]; then
         read -n1 -p "${target} does not exist. Copy?(y/N): " yn
@@ -33,13 +33,15 @@ do
     else
         result=$(diff ${dotty} ${target}) &> /dev/null
         if [ $? -eq 0 ]; then
-            echo "${dotty} and ${target} are identical."
+            #echo "${dotty} and ${target} are identical."
+            echo &> /dev/null
         else
             echo "${dotty}"
             echo
             read -n1 -p "Diff files?(y/N): " yn
             if [[ ${yn} = [yY] ]]; then
                 diff -u ${dotty} ${home_dir}/${dotty} | less -R
+                echo
             fi
             read -n4 -p "Sync ${dotty}?(y/N): " yn
             if [[ ${yn} = [yY] ]]; then
@@ -48,6 +50,6 @@ do
         fi
     fi
     #---
-    echo "<<<<< Finish syncing <<<<<"
+    #echo "<<<<< Finish syncing <<<<<"
 done
 ##-End-of-File-##
