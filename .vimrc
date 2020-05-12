@@ -40,6 +40,9 @@ else
     set shell=/bin/sh
 endif
 
+set clipboard+=unnamed
+set wildmenu
+
 "" session management
 let g:session_directory = "~/.vim/session"
 let g:session_autoload = "no"
@@ -72,8 +75,6 @@ set modelines=10
 set title
 set titleold="Terminal"
 set titlestring=%F
-
-set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
 
 
 "" To be confirmed
