@@ -3,7 +3,8 @@
 Ryosuke YAMAMOTO's dot files
 
 ---
-```bash
+## Contents
+```
 dotfiles
 ├── README.md
 ├── contributors.txt
