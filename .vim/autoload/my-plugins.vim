@@ -28,29 +28,31 @@ call plug#begin(expand('~/.vim/plugged'))
 Plug 'itchyny/lightline.vim'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/neomru.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'Shougo/neoyank.vim'
+Plug 'Shougo/vimfiler.vim'
+Plug 'preservim/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
+Plug 'preservim/nerdcommenter'
+Plug 'Yggdroot/indentLine'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'tpope/vim-fugitive'
+Plug 'Shougo/vimshell.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-endwise'
+Plug 'scrooloose/syntastic'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+Plug 'markonm/traces.vim'
 
 "" To be confirmed
-"Plug 'tpope/vim-commentary'
-"Plug 'tpope/vim-fugitive'
 "Plug 'airblade/vim-gitgutter'
 "Plug 'vim-scripts/grep.vim'
 "Plug 'vim-scripts/CSApprox'
-"Plug 'bronson/vim-trailing-whitespace'
 "Plug 'Raimondi/delimitMate'
 "Plug 'majutsushi/tagbar'
-"Plug 'scrooloose/syntastic'
-"Plug 'Yggdroot/indentLine'
 "Plug 'avelino/vim-bootstrap-updater'
 "Plug 'sheerun/vim-polyglot'
 
-"if isdirectory('/usr/local/opt/fzf')
-"  Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-"else
-"  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-"  Plug 'junegunn/fzf.vim'
-"endif
 "let g:make = 'gmake'
 "if exists('make')
 "        let g:make = 'make'
@@ -58,7 +60,6 @@ Plug 'jistr/vim-nerdtree-tabs'
 
 "Plug 'Shougo/vimproc.vim', {'do': g:make}
 
-"Plug 'Shougo/vimshell.vim'
 "Plug 'SirVer/ultisnips'
 "Plug 'honza/vim-snippets'
 
