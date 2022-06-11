@@ -14,13 +14,13 @@ autoload -Uz compinit && compinit -i
 
 typeset -U path PATH
 
-#--- TeXLive --- 
-export PATH=/usr/local/texlive/2020/bin/x86_64-linux:$PATH
+#--- TeXLive ---
+export PATH=/usr/local/texlive/2021/bin/x86_64-linux:$PATH
 
-#--- rbenv ---
-export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH=/usr/local/sbin:/usr/local/bin:$PATH
-eval "$(rbenv init -)"
+##--- rbenv ---
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#export PATH=/usr/local/sbin:/usr/local/bin:$PATH
+#eval "$(rbenv init -)"
 
 #--- Miniconda3 & Jupyter ---
 #conda_script=/usr/local/miniconda3/etc/profile.d/conda.sh
@@ -31,44 +31,41 @@ eval "$(rbenv init -)"
 #export SAGE_ROOT="/Applications/SageMath-8.7.app/Contents/Resources/sage"
 
 # -----------------------------
-# Plugins managed by Zplugin
+# Plugins managed by zinit
 # -----------------------------
-### Added by Zplugin's installer
-export ZPLUGINDIR=$ZDOTDIR/.zplugin
-source "$ZPLUGINDIR/bin/zplugin.zsh"
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
-### End of Zplugin's installer chunk
+### Added by zinit's installer
+export zinitDIR=$ZDOTDIR/zinit
+source "${zinitDIR}/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+### End of zinit's installer chunk
 
-zplugin load momo-lab/zsh-abbrev-alias # 略語を展開する
-zplugin load zsh-users/zsh-syntax-highlighting # 実行可能なコマンドに色付け
-zplugin load zsh-users/zsh-history-substring-search # history関係
+zinit load momo-lab/zsh-abbrev-alias # 略語を展開する
+zinit load zsh-users/zsh-syntax-highlighting # 実行可能なコマンドに色付け
+zinit load zsh-users/zsh-history-substring-search # history関係
 
 ### タイプ補完
-zplugin load zsh-users/zsh-autosuggestions
-zplugin load zsh-users/zsh-completions
+zinit load zsh-users/zsh-autosuggestions
+zinit load zsh-users/zsh-completions
 
 ### others
-zplugin load rupa/z
-. $ZPLUGINDIR/plugins/rupa---z/z.sh
+#zinit load rupa/z
+#. $zinitDIR/plugins/rupa---z/z.sh
 export _Z_DATA=$ZDOTDIR/.z_data
-#zplugin light "marzocchi/zsh-notify"
-zplugin ice wait'!0'; zplugin light "vintersnow/anyframe"
+#zinit light "marzocchi/zsh-notify"
+zinit ice wait'!0'; zinit light "vintersnow/anyframe"
 
-### OMZ theme
-zplugin snippet OMZ::lib/git.zsh # Load OMZ Git library
-zplugin snippet OMZ::plugins/git/git.plugin.zsh # Load Git plugin from OMZ
-zplugin cdclear -q # <- forget completions provided up to this moment
+zinit cdclear -q # <- forget completions provided up to this moment
 setopt promptsubst
 # Load theme
-#zplugin snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
-#zplugin snippet OMZ::themes/gnzh.zsh-theme #bira.zsh-theme #dstufft.zsh-theme #
+#zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
+#zinit snippet OMZ::themes/gnzh.zsh-theme #bira.zsh-theme #dstufft.zsh-theme #
 # プロンプトのテーマを遅延ロード。以下でプロンプトをいじってるので、遅延は停止中[20190525]。
-#zplugin ice pick'spaceship.zsh' wait'!0'
-zplugin light 'denysdovhan/spaceship-zsh-theme'
+#zinit ice pick'spaceship.zsh' wait'!0'
+zinit light 'denysdovhan/spaceship-zsh-theme'
 
 # Load normal Github plugin with theme depending on OMZ Git library
-#zplugin light NicoSantangelo/Alpharized
+#zinit light NicoSantangelo/Alpharized
 
 ## -----------------------------
 ## User configuration

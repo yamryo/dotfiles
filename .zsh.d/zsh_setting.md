@@ -22,14 +22,17 @@
 				|-- .zsh_history
 	```
 ## 設定
-* プラグインマネージャは `zplugin` を利用する。
+* プラグインマネージャは `zinit` を利用する。
 	```zsh
 	> cd ~/.zsh.d
-	> git clone https://github.com/zdharma/zplugin.git .zplugin/bin
+	> git clone https://github.com/zdharma-continuum/zinit.git zinit
 	```
 * `dotfiles` を `github` からクローンして、`.zshenv` と `.zshrc` をコピー。
 
 ### 作業記録
+
+#### 20220611
+* プラグインマネージャを `zplugin` から `zinit` に変更した。それに伴い、このメモも編集。
 
 #### 20190312
 * プラグインマネージャを `zplug` から `zplugin` に変更した。それに伴い、このメモも編集。
