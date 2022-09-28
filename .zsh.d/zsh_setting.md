@@ -18,18 +18,23 @@
 			|-- .zshenv
 			|-- .zsh.d/
 				|-- .zshrc
-				|-- .zplugin/
+				|-- zinit/
 				|-- .zsh_history
 	```
+
 ## 設定
-* プラグインマネージャは `zinit` を利用する。
+### クローン
+* `dotfiles` を `github` からクローンして、`.zshenv` と `.zshrc` をコピー。
+### プラグインマネージャ
+* `zinit` を利用する。
 	```zsh
 	> cd ~/.zsh.d
 	> git clone https://github.com/zdharma-continuum/zinit.git zinit
 	```
-* `dotfiles` を `github` からクローンして、`.zshenv` と `.zshrc` をコピー。
+### プロンプト
+* `starship` を使う。
 
-### 作業記録
+## 作業記録
 
 #### 20220611
 * プラグインマネージャを `zplugin` から `zinit` に変更した。それに伴い、このメモも編集。

@@ -15,7 +15,7 @@ autoload -Uz compinit && compinit -i
 typeset -U path PATH
 
 #--- TeXLive ---
-export PATH=/usr/local/texlive/2021/bin/x86_64-linux:$PATH
+#export PATH=/usr/local/texlive/2022/bin/x86_64-linux:$PATH
 
 ##--- rbenv ---
 #export PATH="$HOME/.rbenv/bin:$PATH"
@@ -60,9 +60,6 @@ setopt promptsubst
 # Load theme
 #zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
 #zinit snippet OMZ::themes/gnzh.zsh-theme #bira.zsh-theme #dstufft.zsh-theme #
-# プロンプトのテーマを遅延ロード。以下でプロンプトをいじってるので、遅延は停止中[20190525]。
-#zinit ice pick'spaceship.zsh' wait'!0'
-zinit light 'denysdovhan/spaceship-zsh-theme'
 
 # Load normal Github plugin with theme depending on OMZ Git library
 #zinit light NicoSantangelo/Alpharized
@@ -92,35 +89,9 @@ setopt hist_save_no_dups
 #setopt hist_verify
 setopt share_history
 
-function history-fzf() {
-  local tac
-  if which tac > /dev/null; then
-    tac="tac"
-  else
-    tac="tail -r"
-  fi
-  BUFFER=$(history -n 1 | eval $tac | fzf --query "$LBUFFER")
-  CURSOR=$#BUFFER
-  zle reset-prompt
-}
-zle -N history-fzf
-bindkey '^r' history-fzf
-
-# z.sh with fzf
-fzf-z-search() {
-  local res=$(z | sort -rn | cut -c 12- | fzf)
-  if [ -n "$res" ]; then
-    BUFFER+="cd $res"
-    zle accept-line
-  else
-    return 1
-  fi
-}
-zle -N fzf-z-search
-bindkey '^J' fzf-z-search
-#alias cds=fzf-z-search
-
-## For anyframe
+## Binding keys to ZLE
+bindkey '^k' kill-line
+# For anyframe
 bindkey '^xj' anyframe-widget-cdr
 bindkey '^xr' anyframe-widget-execute-history
 bindkey '^xi' anyframe-widget-put-history
@@ -137,11 +108,7 @@ add-zsh-hook chpwd chpwd_recent_dirs
 ## Prompt Customization
 # shorten current path in prompt
 #export PROMPT=$(print $PROMPT | sed -E -e "s|%~|%(7~,%-2~/../%2~,%~)|")
-# For spaceship-zsh-theme
-export SPACESHIP_PROMPT_ADD_NEWLINE="false"
-export PROMPT="╭─ "$PROMPT
-export SPACESHIP_CHAR_SYMBOL="╰─➤ "
-export SPACESHIP_CHAR_COLOR_SUCCESS=""
+eval "$(starship init zsh)"
 
 # for completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
