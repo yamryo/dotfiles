@@ -19,7 +19,8 @@
 			|-- .zsh.d/
 				|-- .zshrc
 				|-- zinit/
-				|-- .zsh_history
+				|-- starship.toml
+				|-- zsh_settting.md
 	```
 
 ## 設定
