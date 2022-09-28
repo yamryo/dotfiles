@@ -108,6 +108,7 @@ add-zsh-hook chpwd chpwd_recent_dirs
 ## Prompt Customization
 # shorten current path in prompt
 #export PROMPT=$(print $PROMPT | sed -E -e "s|%~|%(7~,%-2~/../%2~,%~)|")
+export STARSHIP_CONFIG=$ZDOTDIR/starship.toml
 eval "$(starship init zsh)"
 
 # for completion
