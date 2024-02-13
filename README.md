@@ -50,6 +50,7 @@ dotfiles
 ├── .vimrc
 ├── .zsh.d
 │   ├── .zshrc
+│   └── starship.toml
 │   └── zsh_setting.md
 └── .zshenv
 ```
