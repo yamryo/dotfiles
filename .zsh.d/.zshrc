@@ -14,13 +14,13 @@ autoload -Uz compinit && compinit -i
 
 typeset -U path PATH
 
-#--- TeXLive --- 
-export PATH=/usr/local/texlive/2020/bin/x86_64-linux:$PATH
+#--- TeXLive ---
+export PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
 
-#--- rbenv ---
-export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH=/usr/local/sbin:/usr/local/bin:$PATH
-eval "$(rbenv init -)"
+##--- rbenv ---
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#export PATH=/usr/local/sbin:/usr/local/bin:$PATH
+#eval "$(rbenv init -)"
 
 #--- Miniconda3 & Jupyter ---
 #conda_script=/usr/local/miniconda3/etc/profile.d/conda.sh
@@ -31,44 +31,38 @@ eval "$(rbenv init -)"
 #export SAGE_ROOT="/Applications/SageMath-8.7.app/Contents/Resources/sage"
 
 # -----------------------------
-# Plugins managed by Zplugin
+# Plugins managed by zinit
 # -----------------------------
-### Added by Zplugin's installer
-export ZPLUGINDIR=$ZDOTDIR/.zplugin
-source "$ZPLUGINDIR/bin/zplugin.zsh"
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
-### End of Zplugin's installer chunk
+### Added by zinit's installer
+export zinitDIR=$ZDOTDIR/zinit
+source "${zinitDIR}/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+### End of zinit's installer chunk
 
-zplugin load momo-lab/zsh-abbrev-alias # 略語を展開する
-zplugin load zsh-users/zsh-syntax-highlighting # 実行可能なコマンドに色付け
-zplugin load zsh-users/zsh-history-substring-search # history関係
+zinit load momo-lab/zsh-abbrev-alias # 略語を展開する
+zinit load zsh-users/zsh-syntax-highlighting # 実行可能なコマンドに色付け
+zinit load zsh-users/zsh-history-substring-search # history関係
 
 ### タイプ補完
-zplugin load zsh-users/zsh-autosuggestions
-zplugin load zsh-users/zsh-completions
+zinit load zsh-users/zsh-autosuggestions
+zinit load zsh-users/zsh-completions
 
 ### others
-zplugin load rupa/z
-. $ZPLUGINDIR/plugins/rupa---z/z.sh
+#zinit load rupa/z
+#. $zinitDIR/plugins/rupa---z/z.sh
 export _Z_DATA=$ZDOTDIR/.z_data
-#zplugin light "marzocchi/zsh-notify"
-zplugin ice wait'!0'; zplugin light "vintersnow/anyframe"
+#zinit light "marzocchi/zsh-notify"
+zinit ice wait'!0'; zinit light "vintersnow/anyframe"
 
-### OMZ theme
-zplugin snippet OMZ::lib/git.zsh # Load OMZ Git library
-zplugin snippet OMZ::plugins/git/git.plugin.zsh # Load Git plugin from OMZ
-zplugin cdclear -q # <- forget completions provided up to this moment
+zinit cdclear -q # <- forget completions provided up to this moment
 setopt promptsubst
 # Load theme
-#zplugin snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
-#zplugin snippet OMZ::themes/gnzh.zsh-theme #bira.zsh-theme #dstufft.zsh-theme #
-# プロンプトのテーマを遅延ロード。以下でプロンプトをいじってるので、遅延は停止中[20190525]。
-#zplugin ice pick'spaceship.zsh' wait'!0'
-zplugin light 'denysdovhan/spaceship-zsh-theme'
+#zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
+#zinit snippet OMZ::themes/gnzh.zsh-theme #bira.zsh-theme #dstufft.zsh-theme #
 
 # Load normal Github plugin with theme depending on OMZ Git library
-#zplugin light NicoSantangelo/Alpharized
+#zinit light NicoSantangelo/Alpharized
 
 ## -----------------------------
 ## User configuration
@@ -95,35 +89,9 @@ setopt hist_save_no_dups
 #setopt hist_verify
 setopt share_history
 
-function history-fzf() {
-  local tac
-  if which tac > /dev/null; then
-    tac="tac"
-  else
-    tac="tail -r"
-  fi
-  BUFFER=$(history -n 1 | eval $tac | fzf --query "$LBUFFER")
-  CURSOR=$#BUFFER
-  zle reset-prompt
-}
-zle -N history-fzf
-bindkey '^r' history-fzf
-
-# z.sh with fzf
-fzf-z-search() {
-  local res=$(z | sort -rn | cut -c 12- | fzf)
-  if [ -n "$res" ]; then
-    BUFFER+="cd $res"
-    zle accept-line
-  else
-    return 1
-  fi
-}
-zle -N fzf-z-search
-bindkey '^J' fzf-z-search
-#alias cds=fzf-z-search
-
-## For anyframe
+## Binding keys to ZLE
+bindkey '^k' kill-line
+# For anyframe
 bindkey '^xj' anyframe-widget-cdr
 bindkey '^xr' anyframe-widget-execute-history
 bindkey '^xi' anyframe-widget-put-history
@@ -140,11 +108,8 @@ add-zsh-hook chpwd chpwd_recent_dirs
 ## Prompt Customization
 # shorten current path in prompt
 #export PROMPT=$(print $PROMPT | sed -E -e "s|%~|%(7~,%-2~/../%2~,%~)|")
-# For spaceship-zsh-theme
-export SPACESHIP_PROMPT_ADD_NEWLINE="false"
-export PROMPT="╭─ "$PROMPT
-export SPACESHIP_CHAR_SYMBOL="╰─➤ "
-export SPACESHIP_CHAR_COLOR_SUCCESS=""
+export STARSHIP_CONFIG=$ZDOTDIR/starship.toml
+eval "$(starship init zsh)"
 
 # for completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'

@@ -35,7 +35,7 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'preservim/nerdcommenter'
 Plug 'Yggdroot/indentLine'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'tpope/vim-fugitive'
+"Plug 'tpope/vim-fugitive'
 Plug 'Shougo/vimshell.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'

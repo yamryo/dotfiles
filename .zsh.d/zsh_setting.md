@@ -18,18 +18,32 @@
 			|-- .zshenv
 			|-- .zsh.d/
 				|-- .zshrc
-				|-- .zplugin/
-				|-- .zsh_history
+				|-- zinit/
+				|-- starship.toml
+				|-- zsh_settting.md
 	```
+
 ## 設定
-* プラグインマネージャは `zplugin` を利用する。
+### クローン
+* `dotfiles` を `github` からクローンして、`.zshenv` と `.zshrc` をコピー。
+### プラグインマネージャ
+* `zinit` を利用する。
 	```zsh
 	> cd ~/.zsh.d
-	> git clone https://github.com/zdharma/zplugin.git .zplugin/bin
+	> git clone https://github.com/zdharma-continuum/zinit.git zinit
 	```
-* `dotfiles` を `github` からクローンして、`.zshenv` と `.zshrc` をコピー。
+### プロンプト
+* `starship` を使う。
+* スタイルの定義は `~/.zsh.d/starship.toml` に記述.
 
-### 作業記録
+## 作業記録
+
+#### 20220928
+* プロンプトのスタイル設定を `spaceship` から `starship` に変更した。
+(`spaceship` は zsh のプラグインだが，`starship` は別プログラム。)
+
+#### 20220611
+* プラグインマネージャを `zplugin` から `zinit` に変更した。
 
 #### 20190312
-* プラグインマネージャを `zplug` から `zplugin` に変更した。それに伴い、このメモも編集。
+* プラグインマネージャを `zplug` から `zplugin` に変更した。

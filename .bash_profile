@@ -17,7 +17,8 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-# ----------------------------
+export PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
+#----------------------------
 #   Programming environments
 # ----------------------------
 
@@ -33,7 +34,7 @@ eval "$(rbenv init -)"
 
 #--- jupyter notebook ---
 #. /usr/local/miniconda3/etc/profile.d/conda.sh
-export SAGE_ROOT="/Applications/SageMath-8.7.app/Contents/Resources/sage"
+#export SAGE_ROOT="/Applications/SageMath-8.7.app/Contents/Resources/sage"
 
 # Load ~/.bashrc
 [[ -s "$HOME/.bashrc" ]] && source "$HOME/.bashrc"
