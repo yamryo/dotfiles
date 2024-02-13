@@ -1,5 +1,5 @@
 #!/bin/bash
-# Sync dotfiles with them in the home directory
+# Sync dotfiles with corresponding files in the home directory
 
 cd `dirname $0`/..
 
