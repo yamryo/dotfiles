@@ -135,7 +135,7 @@ cnoreabbrev Qall qall
 
 
 "*********************************************************************
-"" Plugins 
+"" Plugins
 "*********************************************************************
 runtime! autoload/my-plugins.vim
 runtime! autoload/plugin-configs/*.vim

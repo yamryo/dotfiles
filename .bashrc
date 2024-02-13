@@ -76,3 +76,9 @@ else
     export PS1='\w $ '
 fi
 unset color_prompt force_color_prompt
+
+# #  ----------------------------
+# #    Path
+# #  ----------------------------
+
+#PATH="$HOME/bin:$PATH"
