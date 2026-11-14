@@ -1,56 +1,23 @@
-# dotfiles
+# Dotfiles
 
-Ryosuke YAMAMOTO's dot files
+Personal configuration files managed with chezmoi.
 
----
-## Contents
-```
-dotfiles
-├── README.md
-├── contributors.txt
-├── doc
-│   ├── Figs
-│   │   └── ...
-│   └── installedApps.md
-├── script
-│   ├── default-dirs.sh
-│   ├── deploy-dotfiles.sh
-│   ├── set-home-dir-up.sh
-│   ├── sync-dotfiles.sh
-│   └── sync_dotfiles.sh.old
-│
-├── .bash_aliases
-├── .bash_logout
-├── .bash_profile
-├── .bashrc
-├── .config
-│   ├── fontconfig
-│   │   └── fonts.conf
-│   └── user-dirs.dirs
-├── .git
-│   └── ...
-├── .git-completion.bash
-├── .gitconfig
-├── .gitignore
-├── .git-prompt.sh
-├── .inputrc
-├── .pandoc
-│   └── github.css
-├── .pryrc
-├── .tmux
-│   └── config
-│       ├── cirrus
-│       ├── default
-│       └── minimal
-├── .vim
-│   └── autoload
-│       ├── my-plugins.vim
-│       ├── plugin-configs
-│       └── plug.vim
-├── .vimrc
-├── .zsh.d
-│   ├── .zshrc
-│   └── starship.toml
-│   └── zsh_setting.md
-└── .zshenv
-```
+## Directory structure
+
+- `linux/` — Linux configurations
+    - Target baseline: Ubuntu 24.04 (workplace)
+    - Initial snapshot: Pop!\_OS 24.04 / MATE (home)
+- `macos/` — macOS configurations (to be added)
+- `bootstrap/bash/` — Archived bash configurations for initial Linux setup
+
+Linux and macOS configurations are maintained separately.
+
+## chezmoi configuration
+
+Clone this repository to `~/.local/share/chezmoi`.
+
+On Linux, configure `~/.config/chezmoi/chezmoi.toml`:
+
+```toml
+sourceDir = "/home/USERNAME/.local/share/chezmoi/linux"
+workingTree = "/home/USERNAME/.local/share/chezmoi"

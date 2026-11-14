@@ -1,4 +1,0 @@
-# Ignore the small and capital letter
-$if Bash
-set completion-ignore-case on
-$endif

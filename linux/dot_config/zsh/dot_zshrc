@@ -1,0 +1,110 @@
+#echo "loading ~/.zsh.d/.zshrc"
+# -----------------------------
+# PATH and other customize
+# -----------------------------
+#zmodload zsh/zprof && zprof
+
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/.local/bin:$PATH
+
+# Uncomment the following line to disable auto-setting terminal title.
+DISABLE_AUTO_TITLE="true"
+
+typeset -U path PATH
+
+#--- TeXLive ---
+#export PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
+
+#--- Conda ---
+source "$HOME/.local/share/miniforge3/etc/profile.d/conda.sh"
+
+# Jupyter
+export JUPYTER_CONFIG_DIR="$HOME/.config/jupyter"
+export JUPYTERLAB_SETTINGS_DIR="$HOME/.config/jupyter/lab/user-settings"
+export JUPYTERLAB_WORKSPACES_DIR="$HOME/.local/state/jupyterlab/workspaces"
+
+## -----------------------------
+## User configuration
+## -----------------------------
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
+
+export LESS='-g -i -M -R -S -W -z-5 -x4'
+
+# Set personal aliases
+source ~/.config/zsh/aliases.sh
+
+# History
+export HISTFILE=$ZDOTDIR/.zsh_history
+export HISTSIZE=10000
+export SAVEHIST=10000
+setopt hist_ignore_dups
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+#setopt hist_verify
+setopt share_history
+
+## Binding keys to ZLE
+bindkey '^k' kill-line
+
+## Prompt Customization
+# shorten current path in prompt
+#export PROMPT=$(print $PROMPT | sed -E -e "s|%~|%(7~,%-2~/../%2~,%~)|")
+export STARSHIP_CONFIG=$ZDOTDIR/starship.toml
+eval "$(starship init zsh)"
+
+# for completion
+autoload -Uz compinit
+compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump"
+
+setopt auto_list
+setopt auto_menu
+zstyle ':completion:*:default' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# -----------------------------
+# fzf
+# -----------------------------
+if command -v fzf >/dev/null 2>&1; then
+    if fzf --help 2>&1 | grep -q -- '--zsh'; then
+        source <(fzf --zsh)
+    else
+        [[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]] &&
+            source /usr/share/doc/fzf/examples/key-bindings.zsh
+
+        [[ -f /usr/share/doc/fzf/examples/completion.zsh ]] &&
+            source /usr/share/doc/fzf/examples/completion.zsh
+    fi
+fi
+
+# -----------------------------
+# zoxide
+# -----------------------------
+if command -v zoxide >/dev/null 2>&1; then
+    eval "$(zoxide init zsh --cmd cd)"
+fi
+
+# Ctrl+Y でシステムクリップボードを貼り付ける
+function clipboard-yank() {
+    local text
+    text=$(xclip -selection clipboard -o 2>/dev/null) || return
+    CUTBUFFER="$text"
+    zle yank
+}
+zle -N clipboard-yank
+bindkey -M emacs '^Y' clipboard-yank
+
+# Let vim load ~/.config/vim/vimrc
+export VIMINIT="set nocp | set runtimepath^=$HOME/.config/vim | set packpath^=$HOME/.config/vim | source $HOME/.config/vim/vimrc"
+
+# Plugins
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+#if (which zprof > /dev/null) ;then
+#  zprof | less
+#fi

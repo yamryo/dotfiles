@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: underline
+# key: uln
+# group: Math Accents
+# condition: (yas-texmathp)
+# --
+\underline{$0}

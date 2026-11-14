@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: veebar
+# key: lxor
+# group: Math Relations
+# condition: (yas-texmathp)
+# --
+\veebar $0

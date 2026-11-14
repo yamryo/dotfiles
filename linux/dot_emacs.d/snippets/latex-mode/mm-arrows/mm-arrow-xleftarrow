@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: xleftarrow
+# key: xlarr
+# group: Math Arrows
+# condition: (yas-texmathp)
+# --
+\xleftarrow{$0}

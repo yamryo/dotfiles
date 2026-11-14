@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: infty
+# key: oo
+# group: Math Symbols
+# condition: (yas-texmathp)
+# --
+\infty$0
