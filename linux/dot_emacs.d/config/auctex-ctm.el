@@ -1,13 +1,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;*  AUCTeX の設定 (~/.emacs.d/init.el から読まれる)
-;;      Time-stamp: <2026-11-08 00:25:32 (ryosuke)>
+;;      Time-stamp: <2026-11-15 15:14:21 (ryosuke)>
 ;;
 (use-package tex
   :ensure auctex
   :custom
   (TeX-engine 'luatex) ;'uptex)
   (japanese-TeX-engine-default 'luatex) ;'uptex)
-  (TeX-view-program-selection '((output-pdf "Atril")))
+  (setq TeX-view-program-list
+        '(("Papers" "papers %o")))
+  (setq TeX-view-program-selection
+        '((output-pdf "Papers")))
   ;; (TeX-PDF-from-DVI "Dvipdfmx")
   ;;---
   (TeX-source-correlate-mode t) ;nil) ;

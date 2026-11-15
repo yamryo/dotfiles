@@ -1,7 +1,7 @@
 ;;;; -*- mode: lisp-interaction; syntax: elisp; coding: utf-8-emacs -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  Emacs 初期設定ファイル   ~/.emacs.d/init.el
-;;  Time-stamp: <2026-11-07 21:45:40 (ryosuke)>
+;;  Time-stamp: <2026-11-15 15:08:12 (ryosuke)>
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; LoadPath
@@ -18,17 +18,17 @@
 (add-to-load-path "config")
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Set up Emacs' exec-path
-(defun set-exec-path-from-shell-PATH ()
-  (interactive)
-  (let ((path-from-shell (replace-regexp-in-string "[ \t\n]*$" "" (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
-    (setenv "PATH" path-from-shell)
-    (setq exec-path (split-string path-from-shell path-separator))))
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;;; Set up Emacs' exec-path
+;; (defun set-exec-path-from-shell-PATH ()
+;;   (interactive)
+;;   (let ((path-from-shell (replace-regexp-in-string "[ \t\n]*$" "" (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
+;;     (setenv "PATH" path-from-shell)
+;;     (setq exec-path (split-string path-from-shell path-separator))))
 
-;; (if (string-equal "darwin" (symbol-name system-type))
-;;     (set-exec-path-from-shell-PATH))
-(set-exec-path-from-shell-PATH)
+;; ;; (if (string-equal "darwin" (symbol-name system-type))
+;; ;;     (set-exec-path-from-shell-PATH))
+;; (set-exec-path-from-shell-PATH)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 日本語環境設定
@@ -98,7 +98,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("7964b513f8a2bb14803e717e0ac0123f100fb92160dcf4a467f530868ebaae3e" "88f7ee5594021c60a4a6a1c275614103de8c1435d6d08cc58882f920e0cec65e" default))
+   '("7964b513f8a2bb14803e717e0ac0123f100fb92160dcf4a467f530868ebaae3e"
+     "88f7ee5594021c60a4a6a1c275614103de8c1435d6d08cc58882f920e0cec65e"
+     default))
  '(package-selected-packages '(0blayout)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

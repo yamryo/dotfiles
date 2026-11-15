@@ -1,6 +1,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;*  ryosuke の個人的設定 (~/.emacs.d/init.el から読まれる)
-;;     Time-stamp: <2026-11-08 00:40:43 (ryosuke)>
+;;     Time-stamp: <2026-11-15 15:15:26 (ryosuke)>
 
 ;;---------------------------
 ;;* Global Key Bindings
@@ -78,7 +78,7 @@
 ;;;   ファイルの先頭から 8 行以内に Time-stamp: <> または Time-stamp: " " と
 ;;;   書いてあれば、セーブ時に自動的に日付が挿入されます.
 (add-hook 'before-save-hook 'time-stamp) ;;[Note: 'write-file-hooks' is obsolete since 22.1]
-(setq time-stamp-format "%:y-%02m-%02d %02H:%02M:%02S (%u)")
+(setq time-stamp-format "%Y-%02m-%02d %02H:%02M:%02S (%l)")
 
 ;;; バックアップファイルを一箇所にまとめる
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))

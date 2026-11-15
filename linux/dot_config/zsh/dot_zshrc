@@ -91,7 +91,7 @@ fi
 # Ctrl+Y でシステムクリップボードを貼り付ける
 function clipboard-yank() {
     local text
-    text=$(xclip -selection clipboard -o 2>/dev/null) || return
+    text=$(wl-paste --no-newline 2>/dev/null) || return
     CUTBUFFER="$text"
     zle yank
 }
