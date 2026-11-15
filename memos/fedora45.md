@@ -34,6 +34,8 @@
 - 自動ログイン、画面ロック関連の設定を調整。
 - Appleキーボードのファンクションキーを通常のF1–F12として使うため、`hid_apple fnmode=2` を `/etc/modprobe.d/hid_apple.conf` に設定し、dracutで反映。
 - Firefoxの日本語フォント表示対策として、`font.cjk_pref_fallback_order` の優先順を `ja` 始まりに調整。
+- Terminalを専用ワークスペースで全画面表示し、3本指スワイプで切り替える。Tildaの導入は保留。
+- ワークスペースはGNOME標準の横一列を維持。2×3配置用のShell拡張は導入しない。
 - GNOMEのEmacs風キーバインドは `gsettings set org.gnome.desktop.interface gtk-key-theme 'Emacs'` で設定。Firefoxの一部入力欄には効くが、ChatGPTの独自エディターでは `Ctrl-a` が全選択になる場合がある。
 
 ### 日本語入力（fcitx5 + Mozc）
@@ -197,7 +199,7 @@ jupyter lab
 - `jupyter server password` でローカルに認証パスワードを設定。認証設定を含むJSONファイルはGitへ登録しない。
 - トークン認証の仕組み自体は引き続き存在する。ブラウザの認証Cookieが残っていれば再入力が省略される。
 - 接続先はループバックアドレスに限定しており、ネットワーク経由での公開はしない。
-- JupyterLabのブラウザ表示と `python3` / `sagemath` のカーネル登録まで確認済み。**両カーネルでのノートブック内計算の実行確認は別途行う。**
+- JupyterLabのブラウザ表示と `python3` / `sagemath` のカーネル登録まで確認済み。**Python・SageMathの両カーネルで計算実行を確認済み。**
 
 ## chezmoiで管理するもの・しないもの
 
@@ -213,7 +215,6 @@ jupyter lab
 
 ## 未確認・今後の確認
 
-1. JupyterLabで既存のノートブックを開き、PythonとSageMathの各カーネルで実際にセルを実行する。
-2. Fedoraでの設定変更を職場Ubuntuに反映する際、Wayland依存部分やパスの違いを検証する。
-3. GNOMEで発生した画面横線が再発するか様子を見る。
-4. パッケージの完全な再現性が必要になれば、別途conda環境のエクスポートやバージョン固定を検討する。
+1. Fedoraでの設定変更を職場Ubuntuに反映する際、Wayland依存部分やパスの違いを検証する。
+2. GNOMEで発生した画面横線が再発するか様子を見る。
+3. パッケージの完全な再現性が必要になれば、別途conda環境のエクスポートやバージョン固定を検討する。
