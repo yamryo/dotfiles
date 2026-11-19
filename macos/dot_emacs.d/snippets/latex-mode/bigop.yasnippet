@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# contributor: François Garillot <francois@garillot.net>
+# key: bigop
+# group: math
+# name: \bigop_{n}^{}
+# condition: (yas-texmathp)
+# --
+\\big${1:$$(yas/choose-value '("oplus" "otimes" "odot" "cup" "cap" "uplus" "sqcup" "vee" "wedge"))}_{$2}^{$3}$0

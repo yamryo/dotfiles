@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: iff-alt
+# key: iff
+# group: Math Symbols
+# condition: (yas-texmathp)
+# --
+\iff $0

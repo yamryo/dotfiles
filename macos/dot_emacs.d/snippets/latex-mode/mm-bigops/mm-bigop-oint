@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: oint
+# key: oint
+# group: Math Big Operators
+# condition: (yas-texmathp)
+# --
+\oint_{$1}$0
