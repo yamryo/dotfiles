@@ -5,9 +5,7 @@ Personal configuration files managed with chezmoi.
 ## Directory structure
 
 - `linux/` — Linux configurations
-    - Target baseline: Ubuntu 24.04 (workplace)
-    - Initial snapshot: Pop!\_OS 24.04 / MATE (home)
-- `macos/` — macOS configurations (to be added)
+- `macos/` — macOS configurations
 - `bootstrap/bash/` — Archived bash configurations for initial Linux setup
 
 Linux and macOS configurations are maintained separately.
